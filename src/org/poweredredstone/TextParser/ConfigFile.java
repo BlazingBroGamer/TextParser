@@ -62,6 +62,7 @@ public class ConfigFile {
 		List<String> lines = getAllLines();
 		lines.remove(0);
 		if(lines.get(0).startsWith("@")){
+			//Checks for @doc
 			String[] arr = docinfo.split("@doc ")[1].split(",");
 			if(arr.length == 2){
 				type = arr[0].split(":")[1];
@@ -85,6 +86,7 @@ public class ConfigFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//Checking Type
 		System.out.println("Document loaded with type: " + type + " and name: " + name);
 		if(type.equalsIgnoreCase("yaml")){
 			loadYaml();
@@ -93,35 +95,87 @@ public class ConfigFile {
 		}
 	}
 	
-	public String getYamlString(String s){
-		return (String) getYaml(s);
+	/**
+	 * GetYamlString
+	 * 
+	 * Gets a string from the path, in the yaml document loaded above.
+	 * 
+	 * @param path
+	 * @return
+	 */
+	
+	public String getYamlString(String path){
+		return (String) getYaml(path);
 	}
 	
+	/**
+	 * GetYaml
+	 * 
+	 * This is used to get objects from the Text File
+	 * 
+	 * @param s
+	 * @return
+	 */
+	
 	@SuppressWarnings("unchecked")
-	public Object getYaml(String s){
+	public Object getYaml(String path){
 		Map<String, Object> object;
 		try {
 			object = (Map<String, Object>) y.load(new FileInputStream(f));
-			return object.get(s);
+			return object.get(path);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
+	/**
+	 * GetYamlStringList
+	 * 
+	 * Gets a string list from the path, in the yaml document loaded above.
+	 * 
+	 * @param path
+	 * @return
+	 */
+	
 	@SuppressWarnings("unchecked")
-	public List<String> getYamlStringList(String s){
-		return (List<String>)getYaml(s);
+	public List<String> getYamlStringList(String path){
+		return (List<String>)getYaml(path);
 	}
 	
-	public int getYamlInt(String s){
-		return (int) getYaml(s);
+	/**
+	 * GetYamlInt
+	 * 
+	 * Gets an integer from the path, in the yaml document loaded above.
+	 * 
+	 * @param path
+	 * @return
+	 */
+	
+	public int getYamlInt(String path){
+		return (int) getYaml(path);
 	}
 	
+	/**
+	 * GetYamlIntList
+	 * 
+	 * Gets an integer list from the path, in the yaml document above.
+	 * 
+	 * @param path
+	 * @return
+	 */
+	
 	@SuppressWarnings("unchecked")
-	public List<Integer> getYamlIntList(String s){
-		return (List<Integer>)getYaml(s);
+	public List<Integer> getYamlIntList(String path){
+		return (List<Integer>)getYaml(path);
 	}
+	
+	/**
+	 * FinishEdit
+	 * 
+	 * This command saves the progress to the file, and retypes the doc data in the top line.
+	 * 
+	 */
 	
 	public void finishEdit(){
 		List<String> lines = getAllLines();
@@ -141,14 +195,24 @@ public class ConfigFile {
 		}
 	}
 	
-	public void loadJson(){
-		
-	}
+	/**
+	 * LoadYaml
+	 * 
+	 * Planning to add more later, but this loads the Yaml file up.
+	 * 
+	 */
 	
 	public void loadYaml(){
 		y = new Yaml();
-		
 	}
+
+	/**
+	 * GetAllLines
+	 * 
+	 * Gets all the lines from the File above.
+	 * 
+	 * @return
+	 */
 	
 	public List<String> getAllLines(){
 		List<String> lines = null;
