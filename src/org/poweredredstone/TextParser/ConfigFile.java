@@ -26,6 +26,15 @@ public class ConfigFile {
 		new ConfigFile("Hi", "lol");
 	}
 	
+	/**
+	 * GetByName
+	 * 
+	 * Gets a file according to their doc name
+	 * 
+	 * @param pn
+	 * @param name
+	 */
+	
 	public ConfigFile getByName(String pn, String name){
 		File f = new File("plugins/" + pn);
 		for(File f2 : f.listFiles()){
@@ -34,6 +43,15 @@ public class ConfigFile {
 		}
 		return new ConfigFile(pn, name + ".pr");
 	}
+	
+	/**
+	 * ConfigFile
+	 * 
+	 * Creates a config file according to their file name
+	 * 
+	 * @param pn
+	 * @param fn
+	 */
 	
 	public ConfigFile(String pn, String fn){
 		System.out.println("Loading document...");
